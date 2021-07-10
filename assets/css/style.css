@@ -1,0 +1,25 @@
+
+.hideQuestion {
+    display: none;
+}
+
+ol {
+    list-style-position: inside;
+}
+
+ol li {
+    border: 1px solid black;
+    margin: 5px;
+    background-color: rgba(124, 41, 124, 0.712);
+    width: 250px;
+    border-radius: 10px;
+
+}
+
+ol li:active {
+background-color: blueviolet;
+}
+
+.done {
+    display: none;
+}
