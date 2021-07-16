@@ -24,47 +24,32 @@ var quizData = [
     {
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
         answers: ["JavaScript", "Terminal/bash", "For loops", "console.log"],
-        correctAns: 2
+        correctAns: 3
     }
 ];
+var time = 60;
+var timer
+var display = document.querySelector("#time");
 
 // ADD TIMER START
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        // minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = seconds;
-
-        if (--timer < 0) {
-            timer = duration;
-            // Use `clearInterval()` to stop the timer - THIS DIDNT WORK TO STOP
-            clearInterval(timeInterval);
-
-            // Call the `doneGame()` function
-            doneGame();
-        }
-    }, 1000);
+function startTimer() {
+    time = time - 1;
+    display.textContent = time;
+    if (time <= 0) {
+        doneGame();
+    }
 }
-
-window.onload = function () {
-    var fiveMinutes = 60 * 5,
-        display = document.querySelector('#time');
-    startTimer(fiveMinutes, display);
-};
 // ADD TIMER END
 
 
-
-
 function showQuestion() {
+    // check if we're at the last question
+    if (currentQuestionIndex >= 4) {
+        return doneGame();
+    }
     currentQuestionIndex++;
-    // if (lastQuestion) - check if the quiz is done
-    // lastQuestion();
+    console.log("currentQuestionIndex", currentQuestionIndex);
+
 
     var currentQuestionData = quizData[currentQuestionIndex];
     // Add a list of question 1 answers START
@@ -106,7 +91,8 @@ var correctAnswerCounter = 0;
 
 // create a function named checkAnswer. get what the user selected, use the correct answer in curentQuestionData and compare it then continue
 function checkChoice(e) {
-    // console.log(e.target.textContent);
+    // e.stopPropagation();
+    // e.preventDefault();
     let currentQuestionData = quizData[currentQuestionIndex];
     let correctChoiceIndex = currentQuestionData.correctAns;
     let correctChoiceText = currentQuestionData.answers[correctChoiceIndex];
@@ -120,18 +106,31 @@ function checkChoice(e) {
     } else {
         result.textContent = "Wrong!";
     }
-    setTimeout(showQuestion, 3000);
+    setTimeout(showQuestion, 1000);
 }
 
-// function followingQuestion() {
-//     currentQuestionIndex++;
-//     showQuestion();
-// }
+
 // Done game page START
 function doneGame() {
+    clearInterval(timer);
+    var yourFinalScore = document.querySelector('.finalScore');
+    var doneGameScreen = document.querySelector('.done');
+    doneGameScreen.style.display = "block";
+    var hideQuestions = document.querySelector("#questionContainer");
+    hideQuestions.style.display = "none";
+    yourFinalScore.textContent = `Your final score is ${time}`;
+    highScores();
 
 }
 
+function highScores() {
+
+    var submitScores = document.querySelector("#submitBtn");
+    submitScores.addEventListener("click", function () {
+        // capture initials, save to local storage, and go to highscores page
+        window.open("./highscores.html");
+    })
+}
 
 // Done game page END
 var startBtn = document.getElementById("startBtn");
@@ -140,5 +139,6 @@ startBtn.addEventListener("click", startQuiz);
 function startQuiz() {
     var firstMessage = document.getElementById("start-quiz");
     firstMessage.style.display = "none";
+    timer = setInterval(startTimer, 1000);
     showQuestion();
 }
