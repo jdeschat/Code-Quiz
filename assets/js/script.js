@@ -30,6 +30,8 @@ var quizData = [
 var time = 60;
 var timer;
 var display = document.querySelector("#time");
+
+// local storage start
 if (!localStorage.getItem("highScores")) {
     localStorage.setItem("highScores", JSON.stringify([]));
 }
@@ -44,6 +46,19 @@ if (window.location.pathname === "/Users/joelledeschatelets/Desktop/Challenges/c
         scoreBoard.appendChild(liEl);
     }
 } else {
+    // local storage end
+
+    // Start quiz start
+    var startBtn = document.getElementById("startBtn");
+    startBtn.addEventListener("click", startQuiz);
+
+    function startQuiz() {
+        var firstMessage = document.getElementById("start-quiz");
+        firstMessage.style.display = "none";
+        timer = setInterval(startTimer, 1000);
+        showQuestion();
+    }
+    // Start quiz end
 
     // ADD TIMER START
     function startTimer() {
@@ -173,18 +188,4 @@ if (window.location.pathname === "/Users/joelledeschatelets/Desktop/Challenges/c
 }
 
 
-// Start quiz start
-var startBtn = document.getElementById("startBtn");
 
-if (!startBtn === null) {
-    // TODO: check if startBtn is now
-    startBtn.addEventListener("click", startQuiz);
-}
-
-function startQuiz() {
-    var firstMessage = document.getElementById("start-quiz");
-    firstMessage.style.display = "none";
-    timer = setInterval(startTimer, 1000);
-    showQuestion();
-}
-    // Start quiz end
