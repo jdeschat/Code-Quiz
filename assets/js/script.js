@@ -172,15 +172,18 @@ if (window.location.pathname === "/Users/joelledeschatelets/Desktop/Challenges/c
 
     // Clear HighScores
     var clearBtn = document.getElementById("clearHighScores");
-    clearBtn.addEventListener("click", clearScores);
-    function clearScores() {
-        localStorage.setItem("highScores", JSON.stringify([]));
-        // TODO: clear the lists of high scores on the screen
+    var goBack = document.getElementById("goBack")
+    if (!startBtn === null) {
+        clearBtn.addEventListener("click", clearScores);
+        function clearScores() {
+            localStorage.setItem("highScores", JSON.stringify([]));
+            // TODO: clear the lists of high scores on the screen
+            scoreBoard = [];
+        }
 
+        goBack.addEventListener("click", startQuiz);
     }
 
-
-    // Done game page END
 
     // Start quiz start
     var startBtn = document.getElementById("startBtn");
