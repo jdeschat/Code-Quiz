@@ -153,49 +153,38 @@ if (window.location.pathname === "/Users/joelledeschatelets/Desktop/Challenges/c
             localStorage.setItem("highScores", JSON.stringify(localScores));
             window.open("./highscores.html");
 
-            // var scoreSheet = document.querySelector('.finalScore');
-
-            // for (let i = 0; i < 10; i++) {
-            //     scoreSheet[i];
-            // }
-            // scoreSheet.textContent = `${i} ${#initials} - ${time}`;
-
-
         });
-
-        // var goBack = document.querySelector("#goBack");
-        // goBack.addEventListener("click", function () {
-
-        // })
-
     };
 
     // Clear HighScores
     var clearBtn = document.getElementById("clearHighScores");
     var goBack = document.getElementById("goBack")
-    if (!startBtn === null) {
+
+    if (!clearBtn === null) {
         clearBtn.addEventListener("click", clearScores);
         function clearScores() {
             localStorage.setItem("highScores", JSON.stringify([]));
             // TODO: clear the lists of high scores on the screen
-            scoreBoard = [];
+            console.log("scoreBoard")
         }
-
+        scoreBoard = [];
         goBack.addEventListener("click", startQuiz);
     }
+}
 
 
-    // Start quiz start
-    var startBtn = document.getElementById("startBtn");
+// Start quiz start
+var startBtn = document.getElementById("startBtn");
+
+if (!startBtn === null) {
     // TODO: check if startBtn is now
     startBtn.addEventListener("click", startQuiz);
-
-    function startQuiz() {
-        var firstMessage = document.getElementById("start-quiz");
-        firstMessage.style.display = "none";
-        timer = setInterval(startTimer, 1000);
-        showQuestion();
-    }
-    // Start quiz end
-
 }
+
+function startQuiz() {
+    var firstMessage = document.getElementById("start-quiz");
+    firstMessage.style.display = "none";
+    timer = setInterval(startTimer, 1000);
+    showQuestion();
+}
+    // Start quiz end
