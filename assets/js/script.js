@@ -64,8 +64,7 @@ if (window.location.pathname === "/Users/joelledeschatelets/Desktop/Challenges/c
 
     if (goBackBtn) {
         goBackBtn.addEventListener("click", function () {
-            var backToStart = document.getElementById("start-quiz");
-            // backToStart.
+            window.open("./index.html");
         });
     }
 } else {
