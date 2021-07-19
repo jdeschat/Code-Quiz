@@ -45,6 +45,29 @@ if (window.location.pathname === "/Users/joelledeschatelets/Desktop/Challenges/c
         liEl.textContent = scores[i].name + " - " + scores[i].score;
         scoreBoard.appendChild(liEl);
     }
+    // Clear HighScores
+    var clearBtn = document.getElementById("clearHighScores");
+    var goBackBtn = document.getElementById("goBack")
+
+    if (clearBtn) {
+        clearBtn.addEventListener("click", clearScores);
+        console.log("clear button");
+        function clearScores() {
+            localStorage.setItem("highScores", JSON.stringify([]));
+            // TODO: clear the lists of high scores on the screen
+            console.log("scoreBoard")
+            let scoreBoardEl = document.getElementById("scoreBoard");
+            scoreBoardEl.innerHTML = "";
+        }
+
+    }
+
+    if (goBackBtn) {
+        goBackBtn.addEventListener("click", function () {
+            var backToStart = document.getElementById("start-quiz");
+            // backToStart.
+        });
+    }
 } else {
     // local storage end
 
@@ -70,7 +93,7 @@ if (window.location.pathname === "/Users/joelledeschatelets/Desktop/Challenges/c
     }
     // ADD TIMER END
 
-
+    // show each question START
     function showQuestion() {
         // check if we're at the last question
         if (currentQuestionIndex >= 4) {
@@ -114,7 +137,7 @@ if (window.location.pathname === "/Users/joelledeschatelets/Desktop/Challenges/c
         listEl.appendChild(li4);
 
     }
-    // Add a list of question 1 answers END
+    // show each question END
 
     var correctAnswerCounter = 0;
 
@@ -170,21 +193,6 @@ if (window.location.pathname === "/Users/joelledeschatelets/Desktop/Challenges/c
 
         });
     };
-
-    // Clear HighScores
-    var clearBtn = document.getElementById("clearHighScores");
-    var goBack = document.getElementById("goBack")
-
-    if (!clearBtn === null) {
-        clearBtn.addEventListener("click", clearScores);
-        function clearScores() {
-            localStorage.setItem("highScores", JSON.stringify([]));
-            // TODO: clear the lists of high scores on the screen
-            console.log("scoreBoard")
-        }
-        scoreBoard = [];
-        goBack.addEventListener("click", startQuiz);
-    }
 }
 
 
