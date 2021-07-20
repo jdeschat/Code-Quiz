@@ -37,7 +37,7 @@ if (!localStorage.getItem("highScores")) {
 }
 
 // If we are on highscores page
-if (window.location.pathname === "/Users/joelledeschatelets/Desktop/Challenges/challenge-module-4/highscores.html") {
+if (window.location.pathname === "/challenge-module-4/highscores.html") {
     let scores = JSON.parse(localStorage.getItem("highScores"));
     let scoreBoard = document.querySelector("#scoreBoard");
     for (let i = 0; i < scores.length; i++) {
